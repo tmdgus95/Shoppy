@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { uploadImage } from '../api/uploader';
 import Button from '../components/ui/Button';
 
 export default function NewProduct() {
@@ -7,6 +8,9 @@ export default function NewProduct() {
     const [file, setFile] = useState();
     const handleSubmit = (e) => {
         e.preventDefault();
+        uploadImage(file).then((url) => {
+            console.log(url);
+        });
     };
     const handleChange = (e) => {
         const { name, value, files } = e.target;
