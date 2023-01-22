@@ -29,7 +29,7 @@ export function login() {
 }
 
 export function logout() {
-    signOut(auth).then(() => null);
+    signOut(auth).catch(console.error);
 }
 
 export function onUserStateChange(callback) {
@@ -57,7 +57,7 @@ export async function addNewProduct(product, image) {
         id,
         price: parseInt(product.price),
         image,
-        option: product.option.split(','),
+        options: product.options.split(','),
     });
 }
 
@@ -77,10 +77,10 @@ export async function getCart(userId) {
     });
 }
 
-export async function addOrUpdatedToCart(userId, product) {
+export async function addOrUpdateToCart(userId, product) {
     return set(ref(database, `carts/${userId}/${product.id}`), product);
 }
 
-export async function removeFromCart(userId, product) {
-    return remove(ref(database, `carts/${userId}/${product.id}`));
+export async function removeFromCart(userId, productId) {
+    return remove(ref(database, `carts/${userId}/${productId}`));
 }
